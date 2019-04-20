@@ -1,0 +1,4 @@
+passwords.py
+.vscode/
+*.pyc
+tmp/
