@@ -92,6 +92,8 @@ def downloadPDF(url):
             break
         except FileNotFoundError:
             pass
+        except zipfile.BadZipfile:
+            pass
 
     d = os.path.abspath(z.extract(url.rsplit('/', 1)[-1], "tmp/"))
     z.close()
@@ -120,7 +122,7 @@ def uploadBook(book):
         "button.button.media-button.button-primary.button-large.media-button-select"))
     ).click()
 
-    time.sleep(5)
+    time.sleep(10)
 
     browser.find_element_by_id("publish").click()
 
@@ -130,6 +132,7 @@ if True:
     browser.find_element_by_id("user_pass").send_keys(wordpressPassword)
     browser.find_element_by_id("wp-submit").click()
 
-    uploadBook(books[0])
+    for i in range(len(books)):
+        uploadBook(books[i])
 
 print("done")
